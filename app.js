@@ -5,4 +5,4 @@ app.get('/', (req, res) => {
 	res.sendFile('/human2.html', { root: __dirname });
 });
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
