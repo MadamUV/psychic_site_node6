@@ -12,6 +12,9 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "path": "^0.12.7"
+    "img": "^3.0.3",
+    "node-uuid": "^1.4.8",
+    "path": "^0.12.7",
+    "socket.io": "^2.0.4"
   }
 }

@@ -292,8 +292,8 @@
 		}
 		else if(avatarOptions.getAttribute("class")=="pets"){
 			itemPreview.innerHTML = 'Name your character<br><input id="avatarName" maxlength="12" name="avatarName" type="text"/>';
-			$("#buttons").html('<button onclick="postAvatarWithName()">Finish</button>');
-			$("#buttons").css({"left":"200px"});
+			window.localStorage.setItem("avatarClothed", document.getElementById("relativeContainer").innerHTML);
+			document.getElementById("buttons").innerHTML = '<button onclick="postAvatarWithName()">Choose name</button>';
 		}
 	}
 	function render_html_to_canvas(html, ctx, x, y, width, height) {
@@ -323,131 +323,9 @@
 		return html;
 	}
 	function postAvatarWithName(){
-		name = document.getElementById("avatarName").value;
-		avatar = document.getElementById("relativeContainer").innerHTML;
-		document.getElementById("itemPreview").innerHTML = "Great!";
-		
-		/*$("#relativeContainer").css({'margin':'0px', 'margin-left':'0px', 'width':'400px'});
-		$("table").remove();
-		document.getElementById("aftermath").innerHTML = '<audio loop><source src="audio/Chipmunks2.mp3" type="audio/mpeg"></audio><canvas style="border:2px solid black;" id="canvas1" width="600" height="500"></canvas>';
-		//pubnub init
-		var PUBNUB_mine = PUBNUB.init({
-			publish_key: 'pub-c-a495ff0a-174c-4c53-8ecc-156ece178e0c',
-			subscribe_key: 'sub-c-b18ceac4-a61e-11e7-88d7-aa3d3dcf7b8c',
-			ssl: true
-		  });*/
-		//$(".blinking .blink").css({'visibility':'visible'});
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//avatar = escape(avatar);
-		/*
-		var rand = Math.floor(Math.random()*1000).toString();
-		var theName = av+rand;
-		if (av == ""){
-			theName = "guest";
-		}
-		if (me_id == "10155567524149846"){
-			theName = "Erintuitive";
-		}
-		var num = 0;
-		var count1 = 0;
-		var count2 = 0;
-		var countPresent = 0;
-		window.localStorage.setItem("avatar", avatar);
-		////jsonbin.io/b/59c42edabbab4566375b747c
-		//POST (RAW) /b/:id
-		//POST (RAW) /b/update/:id
-		$.post("http://www.jsonapi.eu3.biz/test.php", {var1: count1});
-		$.get("https://jsonbin.io/b/59c42edabbab4566375b747c", function (data3, textStatus3, jqXHR3) {
-			if(data3['person'].length == 0){
-				$.ajax({
-					url:"https://jsonbin.io/b/update/59c42edabbab4566375b747c",
-					type:"PUT",
-					data: '{"person": [{"user_id":"'+me_id+'", "name":"'+theName+'", "avatar":"'+avatar+'", "pos_x": -1, "pos_y": -1, "facingLeft": false, "blink": false, "spinningLeft": false, "spinningRight": false]}',
-					contentType:"application/json; charset=utf-8",
-					dataType:"json",
-					success: function(data, textStatus, jqXHR){
-						itemPreview.innerHTML = "Great!";
-						window.location.replace("spaceScene.php");
-					}
-				});
-			}
-			for(i=0; i<data3['person'].length; i++){
-				if(data3['person'][i]['user_id'] != me_id){
-					count1 += 1;
-				}
-				else {
-					count2 += 1;
-					countPresent = i;
-				}
-			}
-			if(count1 == 0 && count2 > 0){
-				$.ajax({
-					url:"https://jsonbin.io/b/update/59c42edabbab4566375b747c",
-					type:"PUT",
-					data: '{"person": [{"user_id":"'+me_id+'", "name":"'+theName+'", "avatar":"'+avatar+'", "pos_x": -1, "pos_y": -1, "facingLeft": false, "blink": false, "spinningLeft": false, "spinningRight": false]}',
-					contentType:"application/json; charset=utf-8",
-					dataType:"json",
-					success: function(data, textStatus, jqXHR){
-						itemPreview.innerHTML = "Great!";
-						window.location.replace("spaceScene.php");
-					}
-				});
-			}
-			else if(count1 > 0 && count2 == 0){
-				var pushThis = {
-					"user_id": me_id,
-					"name":theName,
-					"avatar":avatar,
-					"pos_x": -1,
-					"pos_y": -1,
-					"facingLeft": false,
-					"blink": false,
-					"spinningLeft": false,
-					"spinningRight": false
-				};
-				data3['person'].push(pushThis);
-				var len = data3['person'].length;
-				document.getElementById("relativeContainer").innerHTML = "ok";
-				$.ajax({
-					url:"https://api.myjson.com/bins/vzecj",
-					type:"PUT",
-					data: JSON.stringify(data3),
-					contentType:"application/json; charset=utf-8",
-					dataType:"json",
-					success: function(data, textStatus, jqXHR){
-						itemPreview.innerHTML = "Great!";
-						window.location.replace("spaceScene.php");
-					}
-				});
-			}
-			else if(count1 > 0 && count2 > 0){
-				for(i=0; i<data3['person'].length; i++){
-					if(data3['person'][i]['user_id'] == me_id){
-						data3['person'][i]['avatar'] = avatar;
-						data3['person'][i]['name'] = theName;
-						data3['person'][i]['pos_x'] = -1;
-						data3['person'][i]['pos_y'] = -1;
-						data3['person'][i]['facingLeft'] = false;
-						data3['person'][i]['blink'] = false;
-						data3['person'][i]['spinningLeft'] = false;
-						data3['person'][i]['spinningRight'] = false;
-						$.ajax({
-							url:"https://api.myjson.com/bins/vzecj",
-							type:"PUT",
-							data: JSON.stringify(data3),
-							contentType:"application/json; charset=utf-8",
-							dataType:"json",
-							success: function(data, textStatus, jqXHR){
-								itemPreview.innerHTML = "Great!";
-								window.location.replace("spaceScene.php");
-							}
-						});
-						break;
-					}
-				}
-				
-			}
-		});*/
+		$("#buttons").html('');
+		window.localStorage.setItem("name", document.getElementById("avatarName").value);
+		itemPreview.innerHTML = '<form action="/world" method="post"><input type="hidden" name="world" value="world.html"/><input id="skip" value="Go inworld!" name="clothingSubmit" type="submit"/></form>';
 	}
 	function spriteSheet(){
 		html2canvas($("#sprite"), {

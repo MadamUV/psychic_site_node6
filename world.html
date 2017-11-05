@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Erintuitive's psychic chatroom</title>
+	<script src="/assets/js/pixi.min.js"></script>
+	<script src="/assets/js/pixi.dom.js"></script>
+	<script src="/assets/js/crafty.min.js"></script>
+</head>
+<body bgcolor="purple">
+<img src="/assets/svg/MERMAIDS_1239670119.svg" alt="mysterious underwater" width="100%" height="100%"/>
+<div style="position: absolute; top: 0; left: 0;">
+	<div id="rendering" style="margin-left: 28%"></div>
+</div>
+<style>
+	body {
+		overflow: hidden;
+	}
+</style>
+<script>
+	var renderer = PIXI.autoDetectRenderer();
+	document.getElementById("rendering").appendChild(renderer.view);
+	var stage = new PIXI.stage(1000, 650);
+	//dom
+	PIXI.DOM.Setup(renderer, true);
+	//reposition renderer
+	//create elements
+	//var avatarDiv = new PIXI.DOM.Sprite('<div class="avatar"></div>');
+	//stage.addChild(avatarDiv);
+	var avatar = new PIXI.DOM.Sprite(window.localStorage.getItem("avatarClothed"));
+	/*var name = new PIXI.DOM.Sprite('<font color="white">' + window.localStorage.getItem("name") + '</font>', {x: 0, y: 0});
+	avatarDiv.addChild(avatar);
+	avatar.addChild(name);*/
+	stage.addChild(avatar);
+	
+	renderer.render(stage);  
+</script>
+</body>
+</html>
